@@ -1,0 +1,15 @@
+{
+  "name": "polylooper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "cd loopback && npm start",
+    "ui-build":"cd polymer && polymer build && cd ..",
+    "postui-build":"rm -r loopback/client && mv polymer/build/bundled loopback && mv loopback/bundled loopback/client"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

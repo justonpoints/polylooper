@@ -1,0 +1,78 @@
+<html><head></head><body><dom-module id="login-form">
+  <template>
+    <style include="shared-styles">
+      :host {}
+
+      .error{
+        color:red;
+        padding:3px;
+        margin:2px;
+      }
+
+      #elementform{
+        max-width: 500px;
+        margin:auto;
+      }
+
+      paper-input{
+        background-color: #E3F2FD;
+        margin: 4px;
+      }
+    </style>
+    <div class="error" hidden$="{{!has_error}}">Error: {{error_message}}</div>
+
+    <form is="iron-form" method="post" action="https://{{host}}/authentication/login" id="elementform" on-iron-form-response="_response">
+
+          <paper-input name="username" label="User" value="{{user}}" required="">zz-omni</paper-input>
+          <paper-input name="password" label="Password" value="{{password}}" required="" type="password">test</paper-input>
+
+          <paper-button class="submit" raised="" on-click="_submit">Submit</paper-button>
+          <paper-button raised="" on-click="_cancel">Cancel</paper-button>
+    </form>
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'login-form',
+      params:{
+        "username":{
+          type:Object,
+          notify:true,
+          value:"zz-omni"
+        },
+        "password":{
+          type:Number
+        },
+        "has_error":{
+          type:Boolean,
+          value:false
+        },
+        "error_message":{
+          type:String
+        }
+      },
+      listeners: {
+        'iron-form-error': 'login_error'
+      },
+      _submit:function(){
+        this.$.elementform.submit();
+      },
+      _response:function(event){
+        this.fire("login-successful",event.detail.response);
+      },
+      login_error:function(event){
+        this.has_error = true;
+        console.log(event);
+        this.fire("login-successful",event.detail.response);
+        if(event.detail.request.response){
+          this.error_message = event.detail.request.response.error;
+        }
+        else{
+          this.error_message = `Login Error`;
+        }
+      }
+    });
+  </script>
+</dom-module>
+</body></html>

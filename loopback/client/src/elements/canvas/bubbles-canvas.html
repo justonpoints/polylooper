@@ -1,0 +1,8 @@
+<html><head></head><body><dom-module id="bubbles-canvas">
+  <template>
+        <canvas id="crowdControl"></canvas>
+  </template>
+
+  <script>Polymer({is:"bubbles-canvas",bubbles:function(){function t(){this.x=Math.random()*v.canvas.width,this.y=Math.random()*v.canvas.height,this.vx=0,this.vy=0,this.move=i,this.draw=s}function i(){this.x+=this.vx,this.y+=this.vy,this.vx=.9*this.vx,this.vy=.9*this.vy,(this.x>900||this.x<30)&&(this.vx=this.vx*-.9),(this.y>470||this.y<30)&&(this.vy=this.vy*-.9),this.x=(500*this.x+v.canvas.width/2)/501,this.y=(500*this.y+v.canvas.height/2)/501}function s(){v.save(),v.beginPath(),v.translate(this.x,this.y),v.fillStyle="#00f",v.font="italic 30px sans-serif",v.textBaseline="top",v.font="italic 30px sans-serif",v.drawImage(c,-10,-5),v.fillStyle="white",v.fill(),v.restore()}function a(){for(var i=0;i<30;i++){var s=new t;y.push(s)}}function n(){var t;v.clearRect(0,0,v.canvas.width,v.canvas.height);for(t in y){var i;for(i in y)if(i!=t){var s=y[i].x-y[t].x,a=y[i].y-y[t].y,n=Math.sqrt(s*s+a*a);n<40?(y[t].vx+=10*(-s/(n*n)),y[t].vy+=10*(-a/(n*n))):n<100&&(y[t].vx+=.07*(s/n),y[t].vy+=.07*(a/n))}var s=o-y[t].x,a=r-y[t].y,n=Math.sqrt(s*s+a*a);n<100&&(y[t].vx+=10*(-s/n),y[t].vy+=10*(-a/n)),y[t].move(),y[t].draw()}}function h(t){o=t.pageX,r=t.pageY}function e(){v.canvas.width=930,v.canvas.height=520}var v=this.$.crowdControl.getContext("2d"),o=0,r=0,c=new Image;c.src="/images/Bubble.gif";var y=new Array;v.canvas.onmousemove=h,window.onresize=e,onLoad=e(),onLoad=a(),setInterval(n,15)},ready:function(){this.bubbles()}});</script>
+</dom-module>
+</body></html>
