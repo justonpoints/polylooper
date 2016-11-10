@@ -1,0 +1,26 @@
+<dom-module id="logout-button">
+  <template>
+    <style include="shared-styles">
+      :host {}
+    </style>
+    <button id="logout">LogOut</button>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'logout-button',
+      params:{},
+      listeners:{
+        "logout.tap":"_logout"
+      },
+      _submit:function(){},
+      _logout:function(event){
+        this.fire("logout-successful",event.detail.response);
+      },
+      logout:function(){
+        this.set('app_data', null);
+        this.loggedIn = false;
+      }
+    });
+  </script>
+</dom-module>
